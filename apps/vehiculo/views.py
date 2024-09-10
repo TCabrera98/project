@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def vehiculo(request):
+    return render(request, 'vehiculo/index.html')
