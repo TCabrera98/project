@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Core theme CSS (includes Bootstrap)--> 
     <link href="{% static 'home/css/styles.css' %}" rel="stylesheet">
+    <!-- Estilos personalizados para vehículos -->
+    <link href="{% static 'vehiculo/css/estilosautos.css' %}" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation-->
@@ -41,8 +43,8 @@
             <div class="text-center text-white">
                 <h2>Encontrá tu nuevo auto</h2>
                 <div class="mb-4">
-                    <a href="#" class="btn btn-danger rounded-pill d-inline-block mb-3 shadow">0km</a>
-                    <a href="#" class="btn btn-danger rounded-pill d-inline-block mb-3 shadow">Usado</a>
+                    <a href="{% url "vehiculo:nuevos" %}" class="btn btn-danger rounded-pill d-inline-block mb-3 shadow">0km</a>
+                    <a href="{% url "vehiculo:usados" %}" class="btn btn-danger rounded-pill d-inline-block mb-3 shadow">Usado</a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,85 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block CONTENIDO %}
+<div class="container mt-5 mb-5 pt-5">
+    <h2 class="text-center mb-4">0km</h2>
+
+    <!-- Formulario de filtro -->
+    <form method="get" class="filtro-formulario">
+        <!-- Selección de marca -->
+        <div class="mb-3 d-flex justify-content-center">
+            <div class="input-group" style="max-width: 300px;">
+                <select name="marca" id="marca-select" aria-label="Marca" onchange="this.form.submit()" class="filtro-select">
+                    <option value="">Marca</option>
+                    {% for marca in marcas %}
+                        <option value="{{ marca }}" {% if marca == request.GET.marca %}selected{% endif %}>{{ marca }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <!-- Selección de modelo -->
+        <div class="mb-3 d-flex justify-content-center">
+            <div class="input-group" style="max-width: 300px;">
+                <select name="modelo" id="modelo-select" aria-label="Modelo" onchange="this.form.submit()" class="filtro-select">
+                    <option value="">Modelo</option>
+                    {% for modelo in modelos %}
+                        <option value="{{ modelo }}" {% if modelo == request.GET.modelo %}selected{% endif %}>{{ modelo }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="d-flex flex-column align-items-center">
+            <a href="{% url "vehiculo:usados" %}" class="btn btn-custom btn-custom-info mb-3">Ir a usados</a>
+            <a href="{% url "home:home" %}" class="btn btn-custom btn-custom-success mb-3">Menú principal</a>
+            <a href="{% url "vehiculo:nuevos" %}" class="btn btn-custom btn-custom-danger mb-3">Limpiar filtros</a>
+        </div>
+    </form>
+
+    <!-- Espacio entre el formulario y las tarjetas de vehículos -->
+    <div class="my-5"></div>
+
+    <!-- Contenedor de vehículos -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for vehiculo in vehiculos %}
+            <div class="col">
+                <div class="card card-custom">
+                    {% if vehiculo.imagenes.all %}
+                        <!-- Carrusel de imágenes en la tarjeta -->
+                        <div id="carousel-{{ vehiculo.id }}" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for imagen in vehiculo.imagenes.all %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img src="{{ imagen.imagen.url }}" class="d-block w-100 rounded-top" alt="{{ vehiculo.modelo }}">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ vehiculo.id }}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ vehiculo.id }}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    {% else %}
+                        <img src="{% static 'images/default_image.jpg' %}" class="card-img-top rounded-top" alt="Imagen no disponible">
+                    {% endif %}
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ vehiculo.marca }}</h5>
+                        <p class="card-text">Modelo: <strong>{{ vehiculo.modelo }}</strong></p>
+                        <p class="card-text">Versión: <strong>{{ vehiculo.version }}</strong></p>
+                        <p class="card-text">Año: <strong>{{ vehiculo.año }}</strong></p>
+                        <p class="card-text">Kilometraje: <strong>{{ vehiculo.kilometraje }} km</strong></p>
+                        <a href="https://wa.me/?text=Estoy%20interesado%20en%20el%20vehículo%20{{ vehiculo.marca }}" class="btn btn-custom btn-custom-info">Más info</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
