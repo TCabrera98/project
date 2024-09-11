@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from vehiculo.models import Vehiculo
 
 
 def vehiculo(request):
@@ -6,7 +7,60 @@ def vehiculo(request):
 
 
 def nuevos(request):
-    return render(request, 'vehiculo/nuevos.html')
+    marca = request.GET.get("marca", "")
+    modelo = request.GET.get("modelo", "")
+
+    # Obtiene todas las marcas de los vehículos 0km
+    marcas = Vehiculo.objects.filter(condicion="0km").values_list(
+        "marca", flat=True).distinct()
+    vehiculos_nuevos = Vehiculo.objects.filter(condicion="0km")
+
+    # Filtra los vehículos por marca y modelo
+    if marca:
+        vehiculos_nuevos = vehiculos_nuevos.filter(marca__icontains=marca)
+        modelos = Vehiculo.objects.filter(marca__icontains=marca).values_list(
+            "modelo", flat=True).distinct()
+    else:
+        modelos = Vehiculo.objects.none()
+
+    if modelo:
+        vehiculos_nuevos = vehiculos_nuevos.filter(modelo__icontains=modelo)
+
+    contexto = {
+        "marcas": marcas,
+        "vehiculos": vehiculos_nuevos,
+        "marca": marca,
+        "modelo": modelo,
+        "modelos": modelos
+    }
+    return render(request, "vehiculo/nuevos.html", contexto)
+
 
 def usados(request):
-    return render(request, 'vehiculo/usados.html')
+    marca = request.GET.get("marca", "")
+    modelo = request.GET.get("modelo", "")
+
+    # Obtiene todas las marcas de los vehículos usados
+    marcas = Vehiculo.objects.filter(condicion="Usado").values_list(
+        "marca", flat=True).distinct()
+    vehiculos_usados = Vehiculo.objects.filter(condicion="Usado")
+
+    # Filtra los vehículos por marca y modelo
+    if marca:
+        vehiculos_usados = vehiculos_usados.filter(marca__icontains=marca)
+        modelos = Vehiculo.objects.filter(marca__icontains=marca).values_list(
+            "modelo", flat=True).distinct()
+    else:
+        modelos = Vehiculo.objects.none()
+
+    if modelo:
+        vehiculos_usados = vehiculos_usados.filter(modelo__icontains=modelo)
+
+    contexto = {
+        "marcas": marcas,
+        "vehiculos": vehiculos_usados,
+        "marca": marca,
+        "modelo": modelo,
+        "modelos": modelos
+    }
+    return render(request, "vehiculo/usados.html", contexto)
