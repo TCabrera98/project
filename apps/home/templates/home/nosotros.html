@@ -1,0 +1,43 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block CONTENIDO %}
+<div class="container mt-5 mb-5 pt-5">
+    <!-- Sección sobre nosotros -->
+    <section class="text-center mb-5">
+        <h2 class="display-4 mb-4">Sobre Nosotros</h2>
+        <p class="lead">
+            Bienvenidos a <strong>Cabrera Automotores</strong>, una empresa familiar con más de 15 años de trayectoria en el sector automotriz. En <strong>Cabrera Automotores</strong>, transformamos cada compra en una experiencia gratificante.
+        </p>
+        <p>
+            A lo largo de los años, hemos establecido sólidas relaciones con nuestros clientes gracias a nuestra dedicación y compromiso en proporcionarles los mejores autos del mercado. Nuestra empresa se enorgullece de ofrecer no solo vehículos, sino también confianza y valor en cada transacción.
+        </p>
+    </section>
+    
+    <!-- Sección de imágenes en columna -->
+    <div class="text-center mb-5">
+        <div class="d-flex flex-column align-items-center">
+            <img src="{% static 'Home/img/agencia.jpg' %}" alt="Agencia Cabrera Automotores" class="img-fluid rounded shadow mb-4" style="max-width: 100%; height: 400px; object-fit: cover;">
+            <img src="{% static 'Home/img/agencia2.jpeg' %}" alt="Agencia Cabrera Automotores" class="img-fluid rounded shadow" style="max-width: 100%; height: 400px; object-fit: cover;">
+        </div>
+    </div>
+    
+    <!-- Sección por qué elegirnos -->
+    <section class="bg-light p-5 rounded">
+        <div class="container">
+            <h2 class="display-4 mb-4 text-center">¿Por qué elegirnos?</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <h4 class="fw-bold mb-3 text-center">Experiencia y Confianza</h4>
+                    <p class="text-center">
+                        Con más de 15 años en el mercado, hemos ganado la confianza de nuestros clientes a través de nuestra experiencia y profesionalismo.
+                    </p>
+                    <div class="text-center mt-4">
+                        <i class="bi bi-star-fill display-6 text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

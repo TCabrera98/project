@@ -8,16 +8,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url "home:home" %}" style="color: #333; font-weight: 500;">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" style="color: #333; font-weight: 500;">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url "home:nosotros" %}" style="color: #333; font-weight: 500;">Nosotros</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #333; font-weight: 500;">
                         Vehículos
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="border-radius: 0.5rem; box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1); transition: all 0.3s ease;">
-                        <li><a class="dropdown-item" href="#" style="color: #333;">Todos los vehículos</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#" style="color: #333;">0km</a></li>
-                        <li><a class="dropdown-item" href="#" style="color: #333;">Usados</a></li>
+                        <li><a class="dropdown-item" href="{% url "vehiculo:nuevos" %}" style="color: #333;">0km</a></li>
+                        <li><a class="dropdown-item" href="{% url "vehiculo:usados" %}" style="color: #333;">Usados</a></li>
                     </ul>
                 </li>
             </ul>
