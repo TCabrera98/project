@@ -46,14 +46,14 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for vehiculo in vehiculos %}
             <div class="col">
-                <div class="card card-custom">
+                <div class="card shadow-sm rounded border-0" style="max-width: 24rem; margin: auto;">
                     {% if vehiculo.imagenes.all %}
                         <!-- Carrusel de imágenes en la tarjeta -->
                         <div id="carousel-{{ vehiculo.id }}" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 {% for imagen in vehiculo.imagenes.all %}
                                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                        <img src="{{ imagen.imagen.url }}" class="d-block w-100 rounded-top" alt="{{ vehiculo.modelo }}">
+                                        <img src="{{ imagen.imagen.url }}" class="d-block w-100 rounded-top" alt="{{ vehiculo.modelo }}" style="object-fit: cover; width: 100%; height: 350px;">
                                     </div>
                                 {% endfor %}
                             </div>
@@ -75,7 +75,27 @@
                         <p class="card-text">Versión: <strong>{{ vehiculo.version }}</strong></p>
                         <p class="card-text">Año: <strong>{{ vehiculo.año }}</strong></p>
                         <p class="card-text">Kilometraje: <strong>{{ vehiculo.kilometraje }} km</strong></p>
-                        <a href="https://wa.me/?text=Estoy%20interesado%20en%20el%20vehículo%20{{ vehiculo.marca }}" class="btn btn-custom btn-custom-info">Más información</a>
+                        <a href="https://wa.me/?text=Estoy%20interesado%20en%20el%20vehículo%20{{ vehiculo.marca }}%20{{ vehiculo.modelo }}%20del%20año%20{{ vehiculo.año }}.%20¿Podrías%20darme%20más%20información%20sobre%20el%20precio?" 
+                            class="btn btn-custom btn-custom-success" 
+                            style="
+                                background-color: #28a745; /* Color verde de fondo */
+                                color: white; /* Color del texto */
+                                font-size: 0.875rem; /* Tamaño de fuente */
+                                padding: 5px 20px; /* Espaciado interno (alto reducido y largo aumentado) */
+                                width: auto; /* Ajusta el ancho automáticamente */
+                                min-width: 200px; /* Ancho mínimo del botón */
+                                border-radius: 20px; /* Bordes redondeados */
+                                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+                                font-weight: bold; /* Texto en negrita */
+                                text-align: center; /* Centrar el texto */
+                                display: inline-block; /* Asegurar que el ancho y alto se ajusten */
+                                text-decoration: none; /* Quitar el subrayado del enlace */
+                                line-height: 1.2; /* Ajustar la altura de línea para que el botón sea más delgado */
+                                transition: background-color 0.5s ease, transform 0.5s ease; /* Transición suave */
+                            " 
+                            target="_blank">
+                            Contactar por WhatsApp
+                        </a>
                     </div>
                 </div>
             </div>
