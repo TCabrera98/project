@@ -93,4 +93,37 @@
         {% endfor %}
     </div>
 </div>
+
+<!-- Modal de imágenes -->
+{% for vehiculo in vehiculos %}
+    <div class="modal fade" id="modal-{{ vehiculo.id }}" tabindex="-1" aria-labelledby="modalLabel-{{ vehiculo.id }}" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel-{{ vehiculo.id }}">{{ vehiculo.marca }} {{ vehiculo.modelo }} {{ vehiculo.version }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="carouselModal-{{ vehiculo.id }}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for imagen in vehiculo.imagenes.all %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <img src="{{ imagen.imagen.url }}" class="d-block w-100" alt="Imagen de {{ vehiculo.modelo }}" style="object-fit: cover;">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselModal-{{ vehiculo.id }}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselModal-{{ vehiculo.id }}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
 {% endblock %}
