@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from vehiculo.models import Vehiculo
 
 
@@ -64,3 +64,11 @@ def usados(request):
         "modelos": modelos
     }
     return render(request, "vehiculo/usados.html", contexto)
+
+
+def modal_imagenes(request, vehiculo_id):
+    vehiculo = get_object_or_404(Vehiculo, id=vehiculo_id)
+    contexto = {
+        "vehiculo": vehiculo
+    }
+    return render(request, "vehiculo/modal_imagenes.html", contexto)

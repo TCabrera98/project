@@ -7,7 +7,7 @@
 
     <!-- Formulario de filtro -->
     <form method="get" class="filtro-formulario">
-        <!-- Selección de marca -->
+        <!-- Selección de marca y modelo -->
         <div class="mb-3 d-flex justify-content-center">
             <div class="input-group" style="max-width: 300px;">
                 <select name="marca" id="marca-select" aria-label="Marca" onchange="this.form.submit()" class="filtro-select">
@@ -33,9 +33,9 @@
 
         <!-- Botones -->
         <div class="d-flex flex-column align-items-center">
-            <a href="{% url "vehiculo:usados" %}" class="btn btn-custom btn-custom-info mb-3">Ir a usados</a>
-            <a href="{% url "home:home" %}" class="btn btn-custom btn-custom-success mb-3">Menú principal</a>
-            <a href="{% url "vehiculo:nuevos" %}" class="btn btn-custom btn-custom-danger mb-3">Limpiar filtros</a>
+            <a href="{% url 'vehiculo:usados' %}" class="btn btn-custom btn-custom-info mb-3">Ir a usados</a>
+            <a href="{% url 'home:home' %}" class="btn btn-custom btn-custom-success mb-3">Menú principal</a>
+            <a href="{% url 'vehiculo:nuevos' %}" class="btn btn-custom btn-custom-danger mb-3">Limpiar filtros</a>
         </div>
     </form>
 
@@ -47,13 +47,15 @@
         {% for vehiculo in vehiculos %}
             <div class="col">
                 <div class="card shadow-sm rounded border-0" style="max-width: 24rem; margin: auto;">
+                    <!-- Carrusel de imágenes para cada vehículo -->
                     {% if vehiculo.imagenes.all %}
-                        <!-- Carrusel de imágenes en la tarjeta -->
-                        <div id="carousel-{{ vehiculo.id }}" class="carousel slide" data-bs-ride="carousel">
+                        <div id="carousel-{{ vehiculo.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                             <div class="carousel-inner">
                                 {% for imagen in vehiculo.imagenes.all %}
                                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                        <img src="{{ imagen.imagen.url }}" class="d-block w-100 rounded-top" alt="{{ vehiculo.modelo }}" style="object-fit: cover; width: 100%; height: 350px;">
+                                        <img src="{{ imagen.imagen.url }}" class="d-block w-100" alt="{{ vehiculo.modelo }}" style="object-fit: cover; width: 100%; height: 350px;"
+                                             data-bs-toggle="modal"
+                                             data-bs-target="#modal-{{ vehiculo.id }}">
                                     </div>
                                 {% endfor %}
                             </div>
@@ -67,7 +69,7 @@
                             </button>
                         </div>
                     {% else %}
-                        <img src="{% static 'images/default_image.jpg' %}" class="card-img-top rounded-top" alt="Imagen no disponible">
+                        <img src="{% static 'images/default_image.jpg' %}" class="card-img-top rounded-top" alt="Imagen no disponible" style="object-fit: cover; width: 100%; height: 350px;">
                     {% endif %}
                     <div class="card-body text-center">
                         <h5 class="card-title">{{ vehiculo.marca }}</h5>
@@ -76,25 +78,9 @@
                         <p class="card-text">Año: <strong>{{ vehiculo.año }}</strong></p>
                         <p class="card-text">Kilometraje: <strong>{{ vehiculo.kilometraje }} km</strong></p>
                         <a href="https://wa.me/?text=Estoy%20interesado%20en%20el%20vehículo%20{{ vehiculo.marca }}%20{{ vehiculo.modelo }}%20del%20año%20{{ vehiculo.año }}.%20¿Podrías%20darme%20más%20información%20sobre%20el%20precio?" 
-                            class="btn btn-custom btn-custom-success" 
-                            style="
-                                background-color: #28a745; /* Color verde de fondo */
-                                color: white; /* Color del texto */
-                                font-size: 0.875rem; /* Tamaño de fuente */
-                                padding: 5px 20px; /* Espaciado interno (alto reducido y largo aumentado) */
-                                width: auto; /* Ajusta el ancho automáticamente */
-                                min-width: 200px; /* Ancho mínimo del botón */
-                                border-radius: 20px; /* Bordes redondeados */
-                                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
-                                font-weight: bold; /* Texto en negrita */
-                                text-align: center; /* Centrar el texto */
-                                display: inline-block; /* Asegurar que el ancho y alto se ajusten */
-                                text-decoration: none; /* Quitar el subrayado del enlace */
-                                line-height: 1.2; /* Ajustar la altura de línea para que el botón sea más delgado */
-                                transition: background-color 0.5s ease, transform 0.5s ease; /* Transición suave */
-                            " 
-                            target="_blank">
-                            Contactar por WhatsApp
+                            class="btn btn-success btn-sm btn-whatsapp" 
+                            style="font-size: 0.9rem; padding: 5px 12px;">
+                            <i class="fab fa-whatsapp" style="font-size: 1rem;"></i> Consultar por WhatsApp   
                         </a>
                     </div>
                 </div>
@@ -102,4 +88,37 @@
         {% endfor %}
     </div>
 </div>
+
+<!-- Modal de imágenes -->
+{% for vehiculo in vehiculos %}
+    <div class="modal fade" id="modal-{{ vehiculo.id }}" tabindex="-1" aria-labelledby="modalLabel-{{ vehiculo.id }}" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel-{{ vehiculo.id }}">{{ vehiculo.marca }} {{ vehiculo.modelo }} {{ vehiculo.version }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="carouselModal-{{ vehiculo.id }}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for imagen in vehiculo.imagenes.all %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <img src="{{ imagen.imagen.url }}" class="d-block w-100" alt="Imagen de {{ vehiculo.modelo }}" style="object-fit: cover;">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselModal-{{ vehiculo.id }}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselModal-{{ vehiculo.id }}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
 {% endblock %}
