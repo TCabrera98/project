@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Vehiculo, VehiculoImagen, FormularioDeBusqueda
+from .models import Vehiculo, VehiculoImagen
 
 # Personalización del sitio de administración
 admin.site.site_header = "Cabrera Automotores"
@@ -21,15 +21,7 @@ class VehiculoAdmin(admin.ModelAdmin):
     search_fields = ('marca', 'modelo', 'año', 'kilometraje')
 
     # Campos por los que se puede filtrar en el panel de administración
-    list_filter = ('marca', 'modelo', 'año', 'color')
+    list_filter = ('marca', 'modelo', 'año', 'kilometraje')
 
     # Agregar imágenes al panel de administración
     inlines = [VehiculoImagenInline]
-
-
-@admin.register(FormularioDeBusqueda)
-class FormularioDeBusquedaAdmin(admin.ModelAdmin):
-    list_display = ('nombre_completo', 'numero', 'marca',
-                    'modelo', 'año')
-    search_fields = ('nombre_completo', 'numero', 'marca',
-                     'modelo', 'año')
