@@ -94,6 +94,14 @@
     </div>
 </div>
 
+<!-- Botón Ir hacia arriba -->
+<div class="text-center mt-4">
+    <a href="#top" class="btn btn-light d-flex flex-column align-items-center justify-content-center" style="font-size: 15px; padding: 6px 20px; text-decoration: none;">
+        <i class="fas fa-arrow-alt-circle-up" style="font-size: 14px; margin-bottom: 4px;"></i>
+        Ir hacia arriba
+    </a>
+</div>
+
 <!-- Modal de imágenes -->
 {% for vehiculo in vehiculos %}
     <div class="modal fade" id="modal-{{ vehiculo.id }}" tabindex="-1" aria-labelledby="modalLabel-{{ vehiculo.id }}" aria-hidden="true">
