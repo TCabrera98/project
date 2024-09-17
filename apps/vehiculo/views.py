@@ -18,7 +18,7 @@ def nuevos(request):
     # Filtra los vehículos por marca y modelo
     if marca:
         vehiculos_nuevos = vehiculos_nuevos.filter(marca__icontains=marca)
-        modelos = Vehiculo.objects.filter(marca__icontains=marca).values_list(
+        modelos = Vehiculo.objects.filter(condicion="0km", marca__icontains=marca).values_list(
             "modelo", flat=True).distinct()
     else:
         modelos = Vehiculo.objects.none()
@@ -47,8 +47,9 @@ def usados(request):
 
     # Filtra los vehículos por marca y modelo
     if marca:
-        vehiculos_usados = vehiculos_usados.filter(marca__icontains=marca)
-        modelos = Vehiculo.objects.filter(marca__icontains=marca).values_list(
+        vehiculos_usados = vehiculos_usados.filter(
+            condicion="Usado", marca__icontains=marca)
+        modelos = Vehiculo.objects.filter(condicion="Usado", marca__icontains=marca).values_list(
             "modelo", flat=True).distinct()
     else:
         modelos = Vehiculo.objects.none()
