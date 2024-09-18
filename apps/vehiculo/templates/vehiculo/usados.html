@@ -9,7 +9,7 @@
     <form method="get" class="filtro-formulario">
         <!-- Selección de marca -->
         <div class="mb-3 d-flex justify-content-center">
-            <div class="input-group" style="max-width: 300px;">
+            <div class="input-group" style="max-width: 300px; align-items: center">
                 <select name="marca" id="marca-select" aria-label="Marca" onchange="this.form.submit()" class="filtro-select">
                     <option value="">Marca</option>
                     {% for marca in marcas %}
@@ -77,9 +77,10 @@
                         <p class="card-text">Versión: <strong>{{ vehiculo.version }}</strong></p>
                         <p class="card-text">Año: <strong>{{ vehiculo.año }}</strong></p>
                         <p class="card-text">Kilometraje: <strong>{{ vehiculo.kilometraje }} km</strong></p>
-                        <a href="https://wa.me/?text=Estoy%20interesado%20en%20el%20vehículo%20{{ vehiculo.marca }}%20{{ vehiculo.modelo }}%20del%20año%20{{ vehiculo.año }}.%20¿Podrías%20darme%20más%20información%20sobre%20el%20precio?" 
+                        <a href="https://wa.me/5493329629871?text=Estoy%20interesado%20en%20el%20vehículo%20{{ vehiculo.marca }}%20{{ vehiculo.modelo }}%20del%20año%20{{ vehiculo.año }}.%20¿Podrías%20darme%20más%20información%20sobre%20el%20precio?" 
                             class="btn btn-success btn-sm btn-whatsapp" 
-                            style="font-size: 0.9rem; padding: 5px 12px;">
+                            style="font-size: 0.9rem; padding: 5px 12px;" 
+                            target="_blank">
                             <i class="fab fa-whatsapp" style="font-size: 1rem;"></i> Consultar por WhatsApp   
                         </a>
                     </div>
