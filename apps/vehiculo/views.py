@@ -1,9 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 from vehiculo.models import Vehiculo
-
-
-def vehiculo(request):
-    return render(request, 'vehiculo/index.html')
+from vehiculo.forms import ModeloFormularioBusquedaForm
 
 
 def nuevos(request):
@@ -13,7 +11,8 @@ def nuevos(request):
     # Obtiene todas las marcas de los vehículos 0km
     marcas = Vehiculo.objects.filter(condicion="0km").values_list(
         "marca", flat=True).distinct()
-    vehiculos_nuevos = Vehiculo.objects.filter(condicion="0km")
+    vehiculos_nuevos = Vehiculo.objects.filter(
+        condicion="0km").order_by("-id")
 
     # Filtra los vehículos por marca y modelo
     if marca:
@@ -43,7 +42,8 @@ def usados(request):
     # Obtiene todas las marcas de los vehículos usados
     marcas = Vehiculo.objects.filter(condicion="Usado").values_list(
         "marca", flat=True).distinct()
-    vehiculos_usados = Vehiculo.objects.filter(condicion="Usado")
+    vehiculos_usados = Vehiculo.objects.filter(
+        condicion="Usado").order_by("-id")
 
     # Filtra los vehículos por marca y modelo
     if marca:
@@ -73,3 +73,20 @@ def modal_imagenes(request, vehiculo_id):
         "vehiculo": vehiculo
     }
     return render(request, "vehiculo/modal_imagenes.html", contexto)
+
+
+def formulario_busqueda(request):
+    form = ModeloFormularioBusquedaForm()
+    if request.method == "POST":
+        form = ModeloFormularioBusquedaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("vehiculo:formulario_enviado")
+    contexto = {
+        "form": form
+    }
+    return render(request, "vehiculo/formulario_busqueda.html", contexto)
+
+
+def formulario_enviado(request):
+    return render(request, "vehiculo/formulario_enviado.html")

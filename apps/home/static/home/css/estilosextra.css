@@ -1,0 +1,267 @@
+/* Animación para la imagen de fondo de la página principal */
+@keyframes grow {
+    0% {
+        transform: scale(1); 
+    }
+    100% {
+        transform: scale(1.1); 
+    }
+}
+
+/* Clase para aplicar la animación */
+.animate-grow {
+    animation: grow 2s ease-in-out; 
+    animation-fill-mode: forwards; /* Mantiene el estado final de la animación */
+}
+
+
+.custom-dropdown {
+    position: relative;
+}
+
+.custom-dropdown-toggle {
+    color: #333;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+}
+
+
+.card-body-detalles {
+    padding: 1rem; 
+    border: none; 
+    transition: all 0.3s ease, padding 0.3s ease;
+    overflow: hidden;
+}
+
+.custom-dropdown-toggle.collapsed {
+    transform: rotate(0deg); /* Rotación inicial */
+    transition: all 0.3s ease-in-out;
+}
+
+.custom-dropdown-toggle:not(.collapsed) {
+    transform: rotate(90deg); /* Rotación al expandir */
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* Estilos para el formulario en la plantilla nuevos y usados */
+.container .filtro-formulario {
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    max-width: 500px;
+    margin: auto;   
+}
+
+.container .filtro-formulario select{
+    width: 100%;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #495057;
+    appearance: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    text-align: center;
+}
+
+.container .filtro-formulario select:focus {
+    border-color: #80bfff;
+    background-color: #fff;
+}
+
+
+
+/* Estilos para los botones en la plantilla nuevos y usados */
+.container .btn-custom {
+    width: 150px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: bold; /* Letras en negrita */
+    padding: 10px 20px;
+    transition: background-color 0.5s ease, transform 0.5s ease; /* Transición más lenta */
+}
+
+/* Botón de información (Ir a usados) */
+.container .btn-custom-info {
+    background-color: #99c2ff;
+    border: 1px solid #99c2ff;
+    color: #fff;
+}
+
+.container .btn-custom-info:hover {
+    background-color: #80bfff;
+    transform: scale(1.05);
+    color: #fff; /* Mantener el color blanco durante el hover */
+}
+
+.container .btn-custom-info:active {
+    background-color: #80bfff; /* Oscurecer un poco el color al hacer clic */
+    transform: scale(1.1); /* Agrandar un poco más al hacer clic */
+}
+
+/* Botón de éxito (Menú principal) */
+.container .btn-custom-success {
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+}
+
+.container .btn-custom-success:hover {
+    background-color: #23933d;
+    transform: scale(1.05);
+    color: #fff; /* Mantener el color blanco durante el hover */
+}
+
+.container .btn-custom-success:active {
+    background-color: #23933d; /* Oscurecer un poco el color al hacer clic */
+    transform: scale(1.1); /* Agrandar un poco más al hacer clic */
+}
+
+/* Botón de peligro (Limpiar filtros) */
+.container .btn-custom-danger {
+    background-color: #dc3545;
+    border: none;
+    color: #fff;
+}
+
+.container .btn-custom-danger:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+    color: #fff; /* Mantener el color blanco durante el hover */
+}
+
+.container .btn-custom-danger:active {
+    background-color: #c82333; /* Oscurecer un poco el color al hacer clic */
+    transform: scale(1.1); /* Agrandar un poco más al hacer clic */
+}
+
+
+/* Botón de detalles (Ver más detalles) */
+.container .btn-custom-details {
+    background-color: #ededed; 
+    color: #000;
+    border: none;
+    box-shadow: 0 3px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.5s ease, transform 0.5s ease; 
+}
+
+.container .btn-custom-details:hover {
+    background-color: #e7e5e5; /* Un gris oscuro */
+    transform: scale(1.05);
+}
+
+.container .btn-custom-details:active {
+    background-color: #e7e5e5; /* Un poco más oscuro al hacer clic */
+    transform: scale(1.1);
+    color : #000;
+}
+
+/* Botón de WhatsApp */
+.container .btn-custom-whatsapp {
+    background-color: #28a745; /* Verde */
+    color: #fff;
+    border: none;
+    transition: background-color 0.5s ease, transform 0.5s ease; /* Transición más lenta */
+}
+
+.container .btn-custom-whatsapp:hover {
+    background-color: #23933d;
+    transform: scale(1.05);
+}
+
+.container .btn-custom-whatsapp:active {
+    background-color: #23933d; /* Oscurecer un poco el color al hacer clic */
+    transform: scale(1.1);
+}
+
+
+/* Modal para ver más detalles */
+
+.modal-content {
+    background: #f8f9fa;
+    border-radius: 15px;
+}
+
+.list-group-item {
+    position: relative; /* Contexto para el pseudo-elemento */
+    padding: 15px; 
+    border: none;
+}
+
+.list-group-item::after {
+    content: ''; /* Requiere para que el pseudo-elemento se muestre */
+    position: absolute; /* Posiciona este elemento en relación al padre */
+    bottom: 0; 
+    left: 0; 
+    right: 0;
+    height: 2px; 
+    background: linear-gradient(to right, #c82333, rgba(200, 35, 51, 0));
+}
+
+
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    color: #343a40;
+}
+
+.text-center {
+    margin: 1rem 0;
+}
+
+
+/* Estilos para el botón "Ir hacia arriba" */
+.btn-top {
+    font-size: 25px;
+    padding: 10px;
+    text-decoration: none;
+    background-color: #332f2f; 
+    color: #ededed; 
+    border-radius: 50%; 
+    border: none; 
+    box-shadow: none; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    transition: none; 
+    margin: 0 auto; 
+}
+
+.btn-top:hover {
+    color: #ededed !important;
+    box-shadow: none !important;
+}
+
+/* Estilos para centrar y mejorar el formulario de búsqueda */
+.formulario_busqueda {
+    max-width: 600px; /* Ancho máximo del formulario */
+    margin: auto; /* Centra el formulario horizontalmente */
+    margin-bottom: 5rem;
+    padding: 3rem; /* Espaciado interno */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 12px; /* Bordes redondeados */
+    background-color: #ffffff; 
+
+
+}
+
+.formulario_busqueda .form-control {
+    padding: 0.75rem 1rem; /* Espacio interno de los inputs */
+    margin-bottom: 1.5rem; /* Espacio entre los inputs */
+    font-size: 1rem; /* Tamaño de la fuente */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+
+
+

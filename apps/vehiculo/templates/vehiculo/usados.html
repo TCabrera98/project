@@ -34,10 +34,17 @@
         <!-- Botones -->
         <div class="d-flex flex-column align-items-center">
             <a href="{% url 'vehiculo:nuevos' %}" class="btn btn-custom btn-custom-info mb-3">Ir a nuevos</a>
-            <a href="{% url 'home:home' %}" class="btn btn-custom btn-custom-success mb-3">Menú principal</a>
             <a href="{% url 'vehiculo:usados' %}" class="btn btn-custom btn-custom-danger mb-3">Limpiar filtros</a>
+            <a href="{% url 'home:home' %}" class="btn btn-custom btn-custom-success mb-3">Menú principal</a>
         </div>
     </form>
+
+    <div class="container mt-4">
+        <div class="text-center">
+            <a href="{% url 'vehiculo:formulario_busqueda' %}" style="color: #000; text-decoration: none" >¿No encontraste lo qué buscabas? Hace click y dejanos tu consulta.</a>
+        </div>
+    </div>
+    
 
     <!-- Espacio entre el formulario y las tarjetas de vehículos -->
     <div class="my-5"></div>
@@ -49,13 +56,11 @@
                 <div class="card shadow-sm rounded border-0" style="max-width: 24rem; margin: auto;">
                     {% if vehiculo.imagenes.all %}
                         <!-- Carrusel de imágenes en la tarjeta -->
-                        <div id="carousel-{{ vehiculo.id }}" class="carousel slide" data-bs-ride="carousel">
+                        <div id="carousel-{{ vehiculo.id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                             <div class="carousel-inner">
                                 {% for imagen in vehiculo.imagenes.all %}
                                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                        <img src="{{ imagen.imagen.url }}" class="d-block w-100" alt="{{ vehiculo.modelo }}" style="object-fit: cover; width: 100%; height: 350px;"
-                                             data-bs-toggle="modal"
-                                             data-bs-target="#modal-{{ vehiculo.id }}">
+                                        <img src="{{ imagen.imagen.url }}" class="d-block w-100" alt="{{ vehiculo.modelo }}" style="object-fit: cover; width: 100%; height: 350px;" data-bs-toggle="modal" data-bs-target="#modal-images-{{ vehiculo.id }}">
                                     </div>
                                 {% endfor %}
                             </div>
@@ -69,7 +74,7 @@
                             </button>
                         </div>
                     {% else %}
-                        <img src="{% static 'images/default_image.jpg' %}" class="card-img-top rounded-top" alt="Imagen no disponible">
+                        <img src="{% static 'images/default_image.jpg' %}" class="card-img-top rounded-top" alt="Imagen no disponible" style="object-fit: cover; width: 100%; height: 350px;">
                     {% endif %}
                     <div class="card-body text-center">
                         <h5 class="card-title">{{ vehiculo.marca }}</h5>
@@ -77,16 +82,60 @@
                         <p class="card-text">Versión: <strong>{{ vehiculo.version }}</strong></p>
                         <p class="card-text">Año: <strong>{{ vehiculo.año }}</strong></p>
                         <p class="card-text">Kilometraje: <strong>{{ vehiculo.kilometraje }} km</strong></p>
-                        <a href="https://wa.me/5493329629871?text=Estoy%20interesado%20en%20el%20vehículo%20{{ vehiculo.marca }}%20{{ vehiculo.modelo }}%20del%20año%20{{ vehiculo.año }}.%20¿Podrías%20darme%20más%20información%20sobre%20el%20precio?" 
-                            class="btn btn-success btn-sm btn-whatsapp" 
-                            style="font-size: 0.9rem; padding: 5px 12px;" 
-                            target="_blank">
-                            <i class="fab fa-whatsapp" style="font-size: 1rem;"></i> Consultar por WhatsApp   
-                        </a>
+
+                        <!-- Contenedor para los botones en columna -->
+                        <div class="d-flex flex-column align-items-center">
+                            <!-- Botón para ver más detalles -->
+                            <button class="btn btn-custom btn-custom-details mb-4" 
+                                    style="font-size: 0.9rem; padding: 5px 12px;" 
+                                    data-bs-toggle="modal" data-bs-target="#modal-details-{{ vehiculo.id }}">
+                                Ver más detalles
+                            </button>
+                            
+                            <!-- Botón de WhatsApp -->
+                            <a href="https://wa.me/5493329629871?text=Estoy%20interesado%20en%20el%20vehículo%20{{ vehiculo.marca }}%20{{ vehiculo.modelo }}%20%20año%20{{ vehiculo.año }}.%20¿Podrías%20darme%20más%20información%20sobre%20el%20precio?" 
+                               class="btn btn-success btn-custom-whatsapp btn-whatsapp mb-2" 
+                               style="font-size: 1.2rem; padding: 5px 12px; border-radius: 20px;"  
+                               target="_blank">
+                                <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            {% empty %}
+
+            <!-- Modal de imágenes -->
+            <div class="modal fade" id="modal-images-{{ vehiculo.id }}" tabindex="-1" aria-labelledby="modalLabel-images-{{ vehiculo.id }}" aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabel-images-{{ vehiculo.id }}">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="carouselModal-{{ vehiculo.id }}" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    {% for imagen in vehiculo.imagenes.all %}
+                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                            <img src="{{ imagen.imagen.url }}" class="d-block w-100" alt="Imagen de {{ vehiculo.modelo }}" style="object-fit: cover;">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselModal-{{ vehiculo.id }}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselModal-{{ vehiculo.id }}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% empty %}
             <div style="margin: auto;">
                 <p style="text-align: center;">No hay vehículos disponibles.</p>
             </div>
@@ -94,44 +143,63 @@
     </div>
 </div>
 
-<!-- Botón Ir hacia arriba -->
-<div class="text-center mt-4">
-    <a href="#top" class="btn btn-light d-flex flex-column align-items-center justify-content-center" style="font-size: 15px; padding: 6px 20px; text-decoration: none;">
-        <i class="fas fa-arrow-alt-circle-up" style="font-size: 14px; margin-bottom: 4px;"></i>
-        Ir hacia arriba
-    </a>
-</div>
-
-<!-- Modal de imágenes -->
+<!-- Modal de detalles -->
 {% for vehiculo in vehiculos %}
-    <div class="modal fade" id="modal-{{ vehiculo.id }}" tabindex="-1" aria-labelledby="modalLabel-{{ vehiculo.id }}" aria-hidden="true">
+    <div class="modal fade" id="modal-details-{{ vehiculo.id }}" tabindex="-1" aria-labelledby="modalLabel-{{ vehiculo.id }}" aria-hidden="true">
         <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content rounded-3 shadow">
+                <div class="modal-header border-0">
                     <h5 class="modal-title" id="modalLabel-{{ vehiculo.id }}">{{ vehiculo.marca }} {{ vehiculo.modelo }} {{ vehiculo.version }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="carouselModal-{{ vehiculo.id }}" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            {% for imagen in vehiculo.imagenes.all %}
-                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                    <img src="{{ imagen.imagen.url }}" class="d-block w-100" alt="Imagen de {{ vehiculo.modelo }}" style="object-fit: cover;">
-                                </div>
-                            {% endfor %}
+                    <h6 class="text-center"><strong>Detalles</strong></h6>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span><i class="bi bi-gear"></i> <strong>Motor</strong></span> 
+                            <span>{{ vehiculo.motor }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span><i class="bi bi-speedometer2"></i> <strong>Potencia</strong></span>
+                            <span>{{ vehiculo.potencia }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span><i class="bi bi-arrow-repeat"></i> <strong>Transmisión</strong></span>
+                            <span>{{ vehiculo.transmision }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span><i class="bi bi-car-front"></i> <strong>Tracción</strong></span>
+                            <span>{{ vehiculo.traccion }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span><i class="bi bi-fuel-pump"></i> <strong>Capacidad del tanque</strong></span> 
+                            <span>{{ vehiculo.tanque_combustible }}</span>
+                        </li>
+                    </ul>
+
+                    <!-- Botón para mostrar descripción -->
+                    <div class="custom-dropdown text-center">
+                        <button class="btn btn-light custom-dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#descripcion-{{ vehiculo.id }}" aria-expanded="false" aria-controls="descripcion-{{ vehiculo.id }}">
+                            <i class="fas fa-plus"></i> 
+                        </button>                        
+                    </div>
+
+                    <!-- Descripción del vehículo -->
+                    <div class="collapse mt-3 card-body-detalles" id="descripcion-{{ vehiculo.id }}">
+                        <div class="text-center" style="border: none;">
+                            {{ vehiculo.descripcion|linebreaks }}
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselModal-{{ vehiculo.id }}" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselModal-{{ vehiculo.id }}" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 {% endfor %}
+
+<!-- Botón Ir hacia arriba -->
+<div class="text-center mt-4">
+    <a href="#top" class="btn-top">
+        <i class="fas fa-arrow-alt-circle-up"></i>
+    </a>
+</div>
 {% endblock %}
