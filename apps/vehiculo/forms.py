@@ -32,3 +32,17 @@ class ModeloFormularioBusquedaForm(forms.ModelForm):
             'año_inicio': 'Año',
             'año_fin': 'Año',
         }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        nombre_completo = cleaned_data.get('nombre_completo')
+        marca = cleaned_data.get('marca')
+        modelo = cleaned_data.get('modelo')
+
+        if nombre_completo:
+            cleaned_data['nombre_completo'] = nombre_completo.upper()
+        if marca:
+            cleaned_data['marca'] = marca.capitalize()
+        if modelo:
+            cleaned_data['modelo'] = modelo.capitalize()
+        return cleaned_data

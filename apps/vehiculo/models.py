@@ -35,6 +35,13 @@ class Vehiculo(models.Model):
     descripcion = models.TextField(
         null=True, blank=True, default="Sin información")
 
+    def save(self, *args, **kwargs):
+        self.marca = self.marca.capitalize()
+        self.modelo = self.modelo.capitalize()
+        self.version = self.version.capitalize()
+        self.condicion = self.condicion.capitalize()
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.marca} {self.modelo} {self.año}"
 

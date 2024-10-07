@@ -1,25 +1,23 @@
 {% extends "home/base.html" %}
 {% load static %}
-<!-- Main content -->
+
+<!-- CONTENIDO PRINICIPAL | HOME -->
 {% block CONTENIDO %}
 <div class="container-fluid p-0 position-relative" style="height: 100vh; overflow: hidden;">
-<!-- Imagen de fondo -->
-<div class="position-absolute top-0 start-0 w-100 h-100 animate-grow" 
-    style="background-image: url('{% static 'home/img/agencia3.jpeg' %}'); background-size: cover; background-position: center;">
-</div>
-
-<!-- Capa de opacidad -->
-<div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.7);">
-</div>
-<!-- Contenido -->
-<div class="position-relative d-flex justify-content-center align-items-center w-100 h-100">
-    <div class="text-center text-white">
-        <h2>Encontrá tu nuevo auto</h2>
-        <div class="mb-4">
-            <a href="{% url "vehiculo:nuevos" %}" class="btn btn-danger rounded-pill d-inline-block mb-3 shadow">0km</a>
-            <a href="{% url "vehiculo:usados" %}" class="btn btn-danger rounded-pill d-inline-block mb-3 shadow">Usado</a>
+    <!-- Imagen de fondo -->
+    <img src="{% static 'home/img/agencia3.jpeg' %}" alt="Imagen de la agencia Cabrera Automotores con autos en exhibición" class="img-background animate-grow" />
+    <!-- Capa de opacidad para la Imagen de fondo -->
+    <div class="capa-opacidad"></div>
+    
+    <!-- Texto de bienvenida y url hacia los templates de vehiculos -->
+    <div class="position-relative d-flex justify-content-center align-items-center w-100 h-100">
+        <div class="text-center text-white">
+            <h2>Encontrá tu nuevo auto</h2>
+            <div class="mb-4">
+                <a href="{% url 'vehiculo:nuevos' %}" class="btn btn-danger rounded-pill d-inline-block mb-3 shadow">0km</a>
+                <a href="{% url 'vehiculo:usados' %}" class="btn btn-danger rounded-pill d-inline-block mb-3 shadow">Usado</a>
+            </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock CONTENIDO %}

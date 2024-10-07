@@ -2,28 +2,53 @@
 {% block CONTENIDO %}
 <div class="container mt-5 mb-5 pt-5">
     <h1 class="text-center mb-4" style="font-size: 1.8rem;">Ingrese sus datos y preferencias</h1>
-    
     <form method="POST" action="{% url 'vehiculo:formulario_busqueda' %}" class="formulario_busqueda">
         {% csrf_token %}
-        <div class="form-group" style="border-radius: 2z5px">   
-            <input type="text" class="form-control" id="nombreCompleto" name="nombre_completo" placeholder="Nombre Completo" required>
+        <h2 class="text-center mb-5" style="color: #FF0000; font-weight: bold; font-size: 1.5rem;">Cabrera Automotores</h2>
+        
+        <div class="form-group">   
+            <div class="input-group">
+                <span style="display: flex; align-items: center; margin-right: 10px; margin-bottom: 12px;">
+                    <i class="fas fa-user" style="font-size: 0.9rem;"></i>
+                </span>
+                <input type="text" class="form-control" id="nombreCompleto" name="nombre_completo" placeholder="Nombre Completo" required>
+            </div>
         </div>
+        
         <div class="form-group">
             {% if form.numero_celular.errors %}
-            <div class="text-danger text-center">
-                {% for error in form.numero_celular.errors %}
-                <small>{{ error }}</small>
-                {% endfor %}
-            </div>
+                <div class="text-danger text-center">
+                    {% for error in form.numero_celular.errors %}
+                        <small>{{ error }}</small>
+                    {% endfor %}
+                </div>
             {% endif %}
-            <input type="tel" class="form-control" id="numeroCelular" name="numero_celular" placeholder="Número Celular" required>
+            <div class="input-group">
+                <span style="display: flex; align-items: center; margin-right: 10px; margin-bottom: 12px;">
+                    <i class="fas fa-phone" style="font-size: 0.9rem;"></i>
+                </span>
+                <input type="tel" class="form-control" id="numeroCelular" name="numero_celular" placeholder="Número Celular" required>
+            </div>
         </div>
+        
         <div class="form-group">
-            <input type="text" class="form-control" id="marca" name="marca" placeholder="Marca del Vehículo" required>
+            <div class="input-group">
+                <span style="display: flex; align-items: center; margin-right: 10px; margin-bottom: 12px;">
+                    <i class="fas fa-car" style="font-size: 0.9rem;"></i>
+                </span>
+                <input type="text" class="form-control" id="marca" name="marca" placeholder="Marca del Vehículo" required>
+            </div>
         </div>
+        
         <div class="form-group">
-            <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Modelo del Vehículo" required>
+            <div class="input-group">
+                <span style="display: flex; align-items: center; margin-right: 10px; margin-bottom: 12px;">
+                    <i class="fas fa-car-side" style="font-size: 0.9rem;"></i>
+                </span>
+                <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Modelo del Vehículo" required>
+            </div>
         </div>
+        
         <div class="form-group">
             <div class="input-group">
                 {% if form.año_inicio.errors %}
@@ -33,8 +58,13 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                <input type="number" class="form-control mx-2" id="añoInicio" name="año_inicio" placeholder="Año" min="2008" max="2024">
-                <input type="number" class="form-control mx-2" id="añoFin" name="año_fin" placeholder="Año" min="2008" max="2024">
+                <span style="display: flex; align-items: center; margin-right: 10px; margin-bottom: 12px;">
+                    <i class="fas fa-calendar-check" style="font-size: 0.9rem;"></i>
+                </span>
+                <input type="number" class="form-control mx-2" id="añoInicio" name="año_inicio" placeholder="Desde" min="2008" max="2024">
+                
+                <input type="number" class="form-control mx-2" id="añoFin" name="año_fin" placeholder="Hasta" min="2008" max="2024">
+                
                 {% if form.año_fin.errors %}
                     <div class="text-danger text-center">
                         {% for error in form.año_fin.errors %}
@@ -43,11 +73,13 @@
                     </div>
                 {% endif %}
             </div>
-        </div>        
+        </div>
+        
         <div class="d-grid mt-4">
-            <a href="{% url 'vehiculo:formulario_busqueda' %}" class="btn btn-custom btn-custom-danger mb-3 mx-auto">Limpiar filtros</a>
+            <button type="reset" class="btn btn-custom btn-custom-danger mb-3 mx-auto">Limpiar filtros</button>
             <button type="submit" class="btn btn-custom btn-custom-success mx-auto">Enviar</button>
         </div>
     </form>
+    
 </div>
 {% endblock %}

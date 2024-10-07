@@ -1,3 +1,24 @@
+/* Estilos para la imagen de fondo */
+.img-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra todo el área */
+    z-index: -1; /* Envía la imagen detrás de otros elementos */
+}
+
+.capa-opacidad {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+
 /* Animación para la imagen de fondo de la página principal */
 @keyframes grow {
     0% {
@@ -8,11 +29,12 @@
     }
 }
 
-/* Clase para aplicar la animación */
+/* Clase para aplicar la animación de la imagen de fondo de la página principal */
 .animate-grow {
     animation: grow 2s ease-in-out; 
     animation-fill-mode: forwards; /* Mantiene el estado final de la animación */
 }
+
 
 
 .custom-dropdown {
@@ -34,17 +56,33 @@
 }
 
 .custom-dropdown-toggle.collapsed {
-    transform: rotate(0deg); /* Rotación inicial */
+    transform: rotate(0deg); 
     transition: all 0.3s ease-in-out;
 }
 
 .custom-dropdown-toggle:not(.collapsed) {
-    transform: rotate(90deg); /* Rotación al expandir */
+    transform: rotate(90deg); 
     transition: all 0.3s ease-in-out;
 }
 
 
 /* Estilos para el formulario en la plantilla nuevos y usados */
+@keyframes slideIn {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animacion {
+    animation: slideIn 1s ease forwards;
+}
+
+
 .container .filtro-formulario {
     padding: 1rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -54,7 +92,7 @@
     margin: auto;   
 }
 
-.container .filtro-formulario select{
+.container .filtro-formulario select {
     width: 100%;
     background-color: #f8f9fa;
     border: 1px solid #ced4da;
@@ -64,13 +102,13 @@
     color: #495057;
     appearance: none;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s ease, background-color 0.3s ease;
     text-align: center;
 }
 
 .container .filtro-formulario select:focus {
-    border-color: #80bfff;
     background-color: #fff;
+    outline: none; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
 }
 
 
@@ -80,12 +118,12 @@
     width: 150px;
     border-radius: 20px;
     font-size: 0.875rem;
-    font-weight: bold; /* Letras en negrita */
+    font-weight: bold; 
     padding: 10px 20px;
-    transition: background-color 0.5s ease, transform 0.5s ease; /* Transición más lenta */
+    transition: background-color 0.5s ease, transform 0.5s ease; 
 }
 
-/* Botón de información (Ir a usados) */
+/* Botón de Ir a usados */
 .container .btn-custom-info {
     background-color: #99c2ff;
     border: 1px solid #99c2ff;
@@ -95,15 +133,15 @@
 .container .btn-custom-info:hover {
     background-color: #80bfff;
     transform: scale(1.05);
-    color: #fff; /* Mantener el color blanco durante el hover */
+    color: #fff; 
 }
 
 .container .btn-custom-info:active {
-    background-color: #80bfff; /* Oscurecer un poco el color al hacer clic */
-    transform: scale(1.1); /* Agrandar un poco más al hacer clic */
+    background-color: #80bfff; 
+    transform: scale(1.1); 
 }
 
-/* Botón de éxito (Menú principal) */
+/* Botón de Menú principal */
 .container .btn-custom-success {
     background-color: #28a745;
     border: none;
@@ -113,15 +151,15 @@
 .container .btn-custom-success:hover {
     background-color: #23933d;
     transform: scale(1.05);
-    color: #fff; /* Mantener el color blanco durante el hover */
+    color: #fff; 
 }
 
 .container .btn-custom-success:active {
-    background-color: #23933d; /* Oscurecer un poco el color al hacer clic */
-    transform: scale(1.1); /* Agrandar un poco más al hacer clic */
+    background-color: #23933d; 
+    transform: scale(1.1); 
 }
 
-/* Botón de peligro (Limpiar filtros) */
+/* Botón de Limpiar filtros */
 .container .btn-custom-danger {
     background-color: #dc3545;
     border: none;
@@ -131,16 +169,16 @@
 .container .btn-custom-danger:hover {
     background-color: #c82333;
     transform: scale(1.05);
-    color: #fff; /* Mantener el color blanco durante el hover */
+    color: #fff; 
 }
 
 .container .btn-custom-danger:active {
-    background-color: #c82333; /* Oscurecer un poco el color al hacer clic */
-    transform: scale(1.1); /* Agrandar un poco más al hacer clic */
+    background-color: #c82333; 
+    transform: scale(1.1); 
 }
 
 
-/* Botón de detalles (Ver más detalles) */
+/* Botón de Ver más detalles */
 .container .btn-custom-details {
     background-color: #ededed; 
     color: #000;
@@ -150,12 +188,12 @@
 }
 
 .container .btn-custom-details:hover {
-    background-color: #e7e5e5; /* Un gris oscuro */
+    background-color: #e7e5e5; 
     transform: scale(1.05);
 }
 
 .container .btn-custom-details:active {
-    background-color: #e7e5e5; /* Un poco más oscuro al hacer clic */
+    background-color: #e7e5e5; 
     transform: scale(1.1);
     color : #000;
 }
@@ -174,7 +212,7 @@
 }
 
 .container .btn-custom-whatsapp:active {
-    background-color: #23933d; /* Oscurecer un poco el color al hacer clic */
+    background-color: #23933d; 
     transform: scale(1.1);
 }
 
@@ -218,50 +256,62 @@
 }
 
 
-/* Estilos para el botón "Ir hacia arriba" */
+/* Botón de Ir hacia arriba */
 .btn-top {
     font-size: 25px;
     padding: 10px;
-    text-decoration: none;
-    background-color: #332f2f; 
-    color: #ededed; 
-    border-radius: 50%; 
+    text-decoration: none; 
+    color: #45444483; 
     border: none; 
     box-shadow: none; 
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 35px;
-    height: 35px;
     transition: none; 
     margin: 0 auto; 
 }
 
 .btn-top:hover {
-    color: #ededed !important;
-    box-shadow: none !important;
+    color: #45444483;
+    box-shadow: none;
 }
 
 /* Estilos para centrar y mejorar el formulario de búsqueda */
 .formulario_busqueda {
-    max-width: 600px; /* Ancho máximo del formulario */
-    margin: auto; /* Centra el formulario horizontalmente */
+    max-width: 600px; 
+    margin: auto; 
     margin-bottom: 5rem;
-    padding: 3rem; /* Espaciado interno */
+    padding: 3rem; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    border-radius: 12px; /* Bordes redondeados */
-    background-color: #ffffff; 
+    border-radius: 12px; 
+    background-color: #fff; 
 
 
 }
 
 .formulario_busqueda .form-control {
-    padding: 0.75rem 1rem; /* Espacio interno de los inputs */
-    margin-bottom: 1.5rem; /* Espacio entre los inputs */
-    font-size: 1rem; /* Tamaño de la fuente */
-    border-radius: 8px; /* Bordes redondeados */
+    padding: 0.75rem 1rem; 
+    margin-bottom: 1.5rem; 
+    font-size: 1rem; 
+    border-radius: 8px; 
+}
+
+.formulario_busqueda input {
+    text-align: center;
+    margin: 0 auto; 
+    padding: 10px; 
+    border: none;
+    border-bottom: 2px solid #000; 
+}
+
+.formulario_busqueda input:focus {
+    outline: none; 
+    border-bottom: 2px solid #000; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
 }
 
 
-
+.formulario_busqueda input::placeholder {
+    font-weight: bold; 
+}
 
