@@ -1,0 +1,42 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block CONTENIDO %}
+<section class="bg-light py-5 mt-5">
+    <div class="container">
+        <form method="GET" action="{% url 'vehiculo:comparar_vehiculos' %}" class="filtro-formulario animacion p-5 bg-white shadow rounded">
+            <h2 class="text-center mb-4" style="color: #FF0000; font-weight: bold; font-size: 1.5rem;">Formulario de comparación</h2>
+            <h6 class="text-center mb-5">Seleccione dos vehículos a comparar</h6>
+
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-5 mb-4">
+                    <select name="vehiculo_1" id="vehiculo_1" class="form-select">
+                        <option value="">Vehiculo 1</option>
+                        {% for vehiculo in vehiculos %}
+                            <option value="{{ vehiculo.id }}">{{ vehiculo.modelo }} {{ vehiculo.version }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-5 mb-4">
+                    <select name="vehiculo_2" id="vehiculo_2" class="form-select">
+                        <option value="">Vehiculo 2</option>
+                        {% for vehiculo in vehiculos %}
+                            <option value="{{ vehiculo.id }}">{{ vehiculo.modelo }} {{ vehiculo.version }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <!-- Botones dentro de un d-grid para alineación -->
+            <div class="d-grid mt-4">
+                <!-- Botón Limpiar filtros -->
+                <a href="{% url 'vehiculo:formulario_comparar' %}" class="btn btn-custom btn-custom-danger mb-3 mx-auto">Limpiar filtros</a>
+
+                <!-- Botón Comparar -->
+                <button type="submit" class="btn btn-custom btn-custom-success mx-auto">Comparar</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock CONTENIDO %}

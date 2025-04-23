@@ -7,12 +7,16 @@ app_name = "vehiculo"
 urlpatterns = [
     path('nuevos/', views.nuevos, name='nuevos'),
     path('usados/', views.usados, name='usados'),
+    path("formulario_comparar", views.formulario_comparar,
+         name="formulario_comparar"),
+    path("comparar", views.comparar_vehiculos, name="comparar_vehiculos"),
     path('modal-imagenes/<int:vehiculo_id>/',
          views.modal_imagenes, name='modal_imagenes'),
     path('formulario_busqueda/', views.formulario_busqueda,
          name='formulario_busqueda'),
     path('formulario_enviado/', views.formulario_enviado,
          name='formulario_enviado'),
+
 
 ]
 

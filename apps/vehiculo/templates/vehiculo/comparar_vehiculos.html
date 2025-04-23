@@ -1,0 +1,47 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block CONTENIDO %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mt-5 mb-5 pt-5">Tabla de comparación</h2>
+        <div class="row justify-content-center">
+            <!-- Vehículo 1 -->
+            <div class="col-md-5 mb-4">
+                <div class="card shadow rounded-4">
+                    <img src="{{ vehiculo1.imagen.url }}" class="card-img-top rounded-top-4">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">{{ vehiculo1.marca }} {{ vehiculo1.modelo }}</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Motor:</strong> {{ vehiculo1.motor }}</li>
+                            <li class="list-group-item"><strong>Potencia:</strong> {{ vehiculo1.potencia }}</li>
+                            <li class="list-group-item"><strong>Transmisión:</strong> {{ vehiculo1.transmision }}</li>
+                            <li class="list-group-item"><strong>Tracción:</strong> {{ vehiculo1.traccion }}</li>
+                            <li class="list-group-item"><strong>Kilometraje:</strong> {{ vehiculo1.kilometraje }} Km</li>
+                            <li class="list-group-item"><strong>Año:</strong> {{ vehiculo1.año }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vehículo 2 -->
+            <div class="col-md-5 mb-4">
+                <div class="card shadow rounded-4">
+                    <img src="{{ vehiculo2.imagen.url }}" class="card-img-top rounded-top-4">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">{{ vehiculo2.marca }} {{ vehiculo2.modelo }}</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Motor:</strong> {{ vehiculo2.motor }}</li>
+                            <li class="list-group-item"><strong>Potencia:</strong> {{ vehiculo2.potencia }}</li>
+                            <li class="list-group-item"><strong>Transmisión:</strong> {{ vehiculo2.transmision }}</li>
+                            <li class="list-group-item"><strong>Tracción:</strong> {{ vehiculo2.traccion }}</li>
+                            <li class="list-group-item"><strong>Kilometraje:</strong> {{ vehiculo2.kilometraje }} Km</li>
+                            <li class="list-group-item"><strong>Año:</strong> {{ vehiculo2.año }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="{% url 'vehiculo:formulario_comparar' %}" class="btn btn-custom btn-custom-success mt-4 mb-5 d-block mx-auto" aria-label="Ir hacia atrás">Ir hacia atrás</a>
+</section>
+{% endblock CONTENIDO %}

@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 from vehiculo.models import Vehiculo
 from vehiculo.forms import ModeloFormularioBusquedaForm
 
@@ -65,6 +64,30 @@ def usados(request):
         "modelos": modelos
     }
     return render(request, "vehiculo/usados.html", contexto)
+
+
+def formulario_comparar(request):
+    # Obtén todos los vehículos de la base de datos
+    vehiculos = Vehiculo.objects.all()
+    return render(request, 'vehiculo/formulario_comparar.html', {'vehiculos': vehiculos})
+
+
+def comparar_vehiculos(request):
+    vehiculo_id_1 = request.GET.get("vehiculo_1")
+    vehiculo_id_2 = request.GET.get("vehiculo_2")
+
+    if not vehiculo_id_1 or not vehiculo_id_2:
+        return redirect("vehiculo:formulario_comparar")
+
+    vehiculo1 = get_object_or_404(Vehiculo, id=vehiculo_id_1)
+    vehiculo2 = get_object_or_404(Vehiculo, id=vehiculo_id_2)
+
+    contexto = {
+        "vehiculo1": vehiculo1,
+        "vehiculo2": vehiculo2,
+    }
+
+    return render(request, "vehiculo/comparar_vehiculos.html", contexto)
 
 
 def modal_imagenes(request, vehiculo_id):
