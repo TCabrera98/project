@@ -6,7 +6,13 @@
     <div class="container">
         <form method="GET" action="{% url 'vehiculo:comparar_vehiculos' %}" class="filtro-formulario animacion p-5 bg-white shadow rounded">
             <h2 class="text-center mb-4" style="color: #FF0000; font-weight: bold; font-size: 1.5rem;">Formulario de comparación</h2>
-            <h6 class="text-center mb-5">Seleccione dos vehículos a comparar</h6>
+            <h6 class="text-center mb-3">Seleccione dos vehículos a comparar</h6>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="text-danger text-center small mb-4">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
 
             <div class="row justify-content-center mb-4">
                 <div class="col-md-5 mb-4">
@@ -28,14 +34,10 @@
                 </div>
             </div>
 
-            <!-- Botón Limpiar filtros primero -->
-            <div class="text-center mt-4 mb-4">
-                <a href="{% url 'vehiculo:formulario_comparar' %}" class="btn btn-custom btn-custom-danger d-block mx-auto mb-3">Limpiar filtros</a>
-            </div>
-
-            <!-- Botón Comparar -->
-            <div class="text-center mt-4">
-                <button type="submit" class="btn btn-custom btn-custom-success mb-3">Comparar</button>
+            <!-- Botones con mismo espaciado -->
+            <div class="d-grid mt-4">
+                <a href="{% url 'vehiculo:formulario_comparar' %}" class="btn btn-custom btn-custom-danger mb-3 mx-auto">Limpiar filtros</a>
+                <button type="submit" class="btn btn-custom btn-custom-success mx-auto">Comparar</button>
             </div>
         </form>
     </div>
