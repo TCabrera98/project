@@ -30,7 +30,7 @@ def nuevos(request):
         "vehiculos": vehiculos_nuevos,
         "marca": marca,
         "modelo": modelo,
-        "modelos": modelos
+        "modelos": modelos,
     }
     return render(request, "vehiculo/nuevos.html", contexto)
 

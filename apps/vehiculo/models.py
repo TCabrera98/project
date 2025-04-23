@@ -35,12 +35,13 @@ class Vehiculo(models.Model):
     descripcion = models.TextField(
         null=True, blank=True, default="Sin información")
 
-    def save(self, *args, **kwargs):
-        self.marca = self.marca.capitalize()
-        self.modelo = self.modelo.capitalize()
-        self.version = self.version.capitalize()
-        self.condicion = self.condicion.capitalize()
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    # self.marca = self.marca.capitalize()
+    # self.modelo = self.modelo.capitalize()
+    # self.version = self.version.capitalize()
+    # self.condicion = self.condicion.capitalize()
+    # self.transmision = self.transmision.capitalize()
+    # super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.marca} {self.modelo} {self.año}"
@@ -87,10 +88,10 @@ class ModeloFormularioBusqueda(models.Model):
     marca = models.CharField(max_length=50)
     modelo = models.CharField(max_length=50)
     año_inicio = models.PositiveIntegerField(
-        choices=[(año, año) for año in range(2008, datetime.now().year + 1)], null=True, blank=True, default="No especificado"
+        choices=[(año, año) for año in range(2008, datetime.now().year + 1)], null=True, blank=True, default="None"
     )
     año_fin = models.PositiveIntegerField(
-        choices=[(año, año) for año in range(2008, datetime.now().year + 1)], null=True, blank=True, default="No especificado"
+        choices=[(año, año) for año in range(2008, datetime.now().year + 1)], null=True, blank=True, default="None"
     )
 
     def clean(self):

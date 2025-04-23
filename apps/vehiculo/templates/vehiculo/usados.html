@@ -31,6 +31,7 @@
             </div>
         </div>
 
+
         <!-- Botones -->
         <div class="d-flex flex-column align-items-center">
             <a href="{% url 'vehiculo:nuevos' %}" class="btn btn-custom btn-custom-info mb-3" aria-label="Ir a la sección de vehículos nuevos">Ir a nuevos</a>
@@ -83,7 +84,6 @@
                         <p class="card-text">Año: <strong>{{ vehiculo.año }}</strong></p>
                         <p class="card-text">Kilometraje: <strong>{{ vehiculo.kilometraje }} km</strong></p>
 
-                        <!-- Contenedor para los botones en columna -->
                         <div class="d-flex flex-column align-items-center">
                             <!-- Botón para ver más detalles -->
                             <button class="btn btn-custom btn-custom-details mb-4" 
