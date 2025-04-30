@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Vehiculo, VehiculoImagen, ModeloFormularioBusqueda
+from .models import Vehiculo, VehiculoImagen, FormularioBusqueda
 
 # Personalización del sitio de administración
 admin.site.site_header = "Cabrera Automotores"
@@ -30,8 +30,8 @@ class VehiculoAdmin(admin.ModelAdmin):
         return f"{obj.kilometraje:,}".replace(',', '.')
 
 
-@admin.register(ModeloFormularioBusqueda)
-class ModeloFormularioBusquedaAdmin(admin.ModelAdmin):
+@admin.register(FormularioBusqueda)
+class FormularioBusquedaAdmin(admin.ModelAdmin):
 
     # Especifica los campos que se mostrarán en la lista de objetos del admin
     list_display = ('nombre_completo', 'marca', 'modelo', 'año_inicio',

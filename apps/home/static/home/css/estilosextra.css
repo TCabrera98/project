@@ -1,4 +1,6 @@
-/* Estilos para la imagen de fondo */
+/* -------------------------------------- */
+/* Estilos generales para la imagen de fondo */
+/* -------------------------------------- */
 .img-background {
     position: absolute;
     top: 0;
@@ -18,7 +20,9 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-/* Animación para la imagen de fondo de la página principal */
+/* -------------------------------------- */
+/* Animaciones de la página principal */
+/* -------------------------------------- */
 @keyframes grow {
     0% {
         transform: scale(1); 
@@ -28,13 +32,13 @@
     }
 }
 
-/* Clase para aplicar la animación de la imagen de fondo de la página principal */
 .animate-grow {
     animation: grow 2s ease-in-out; 
     animation-fill-mode: forwards; /* Mantiene el estado final de la animación */
 }
 
-/* NAVBAR */
+/* Animación para el LOGO de la barra de navbar (Cabrera Automotores)*/
+
 @keyframes slideInLeft {
     0% {
         transform: translateX(-100%);
@@ -46,38 +50,17 @@
     }
 }
 
-.slide-in {
+
+
+/* -------------------------------------- */
+/* Formularios (Formulario de comparación y búsqueda) */
+/* -------------------------------------- */
+
+/* Animación para filtrar marca-modelo y comparar */
+slide-in {
     animation: slideInLeft 1.7s ease-out forwards;
 }
 
-.custom-dropdown {
-    position: relative;
-}
-
-.custom-dropdown-toggle {
-    color: #333;
-    font-weight: 500;
-    transition: transform 0.3s ease;
-}
-
-.card-body-detalles {
-    padding: 1rem; 
-    border: none; 
-    transition: all 0.3s ease, padding 0.3s ease;
-    overflow: hidden;
-}
-
-.custom-dropdown-toggle.collapsed {
-    transform: rotate(0deg); 
-    transition: all 0.3s ease-in-out;
-}
-
-.custom-dropdown-toggle:not(.collapsed) {
-    transform: rotate(90deg); 
-    transition: all 0.3s ease-in-out;
-}
-
-/* Estilos para el formulario en la plantilla nuevos y usados */
 @keyframes slideIn {
     0% {
         transform: translateY(20px);
@@ -93,6 +76,7 @@
     animation: slideIn 1s ease forwards;
 }
 
+/* Estilos para el formulario en la plantilla nuevos y usados (Filtrar por marca-modelo), formulario de comparación y de busqueda */
 .container .filtro-formulario {
     padding: 1rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -120,6 +104,270 @@
     outline: none; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
 }
+
+.container .formulario-comparar select { 
+    max-width: 170px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin: 0 auto;
+    font-size: 1rem;
+    color: #495057;
+    appearance: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.container .formulario-comparar select:focus {
+    background-color: #fff;
+    outline: none; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
+}
+
+.formulario-busqueda {
+    max-width: 600px; 
+    margin: auto; 
+    margin-bottom: 5rem;
+    padding: 3rem; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px; 
+    background-color: #f8f9fa; 
+}
+
+.formulario-busqueda .form-control {
+    padding: 0.75rem 1rem; 
+    margin-bottom: 1.5rem; 
+    font-size: 1rem; 
+    border-radius: 8px; 
+}
+
+.formulario-busqueda input {
+    text-align: center;
+    margin: 0 auto; 
+    padding: 10px; 
+    border: none;
+    border-bottom: 2px solid #000; 
+    background-color: #f8f9fa;
+}
+
+.formulario-busqueda input:focus {
+    outline: none; 
+    border-bottom: 2px solid #000; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
+}
+
+.formulario-busqueda input::placeholder {
+    font-weight: bold; 
+}
+
+/* -------------------------------------- */
+/* Estilos para los botones */
+/* -------------------------------------- */
+
+/* Botones generales */
+.btn-custom {
+    width: 150px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: background-color 0.5s ease, transform 0.5s ease;
+    color: #fff !important;
+}
+
+/* Botón de Ir a nuevos y usados */
+.btn-custom-info {
+    background-color: #99c2ff;
+}
+
+.btn-custom-info:hover {
+    background-color: #80bfff;
+    transform: scale(1.05);
+}
+
+.btn-custom-info:active {
+    background-color: #80bfff;
+    transform: scale(1.1);
+}
+
+/* Botón de Limpiar filtros */
+.btn-custom-danger {
+    background-color: #dc3545;
+}
+
+.btn-custom-danger:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+.btn-custom-danger:active {
+    background-color: #c82333;
+    transform: scale(1.1);
+}
+
+/* Botón de Menú principal */
+.btn-custom-success {
+    background-color: #28a745;
+}
+
+.btn-custom-success:hover {
+    background-color: #23933d;
+    transform: scale(1.05);
+}
+
+.btn-custom-success:active {
+    background-color: #23933d;
+    transform: scale(1.1);
+}
+
+/* Botón de Ver más detalles y comparar vehículos */
+.btn-custom-details {
+    background-color: #000000bd;
+    box-shadow: 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.btn-custom-details:hover {
+    background-color: #000000d6;
+    transform: scale(1.05);
+}
+
+.btn-custom-details:active {
+    background-color: #e7e5e5;
+    transform: scale(1.1);
+    color: #000;
+}
+
+/* Botón de WhatsApp */
+.btn-custom-whatsapp {
+    background-color: #28a745; /* Verde */
+    color: #fff;
+    border: none;
+    transition: background-color 0.5s ease, transform 0.5s ease; /* Transición más lenta */
+}
+
+.btn-custom-whatsapp:hover {
+    background-color: #23933d;
+    transform: scale(1.05);
+}
+
+.btn-custom-whatsapp:active {
+    background-color: #23933d; 
+    transform: scale(1.1);
+}
+
+/* -------------------------------------- */
+/* Estilos para el modal */
+/* -------------------------------------- */
+
+.modal-content {
+    background: #f8f9fa;
+    border-radius: 15px;
+}
+
+.list-group-item {
+    position: relative; /* Contexto para el pseudo-elemento */
+    padding: 15px; 
+    border: none;
+}
+
+.list-group-item::after {
+    content: ''; /* Requiere para que el pseudo-elemento se muestre */
+    position: absolute; /* Posiciona este elemento en relación al padre */
+    bottom: 0; 
+    left: 0; 
+    right: 0;
+    height: 2px; 
+    background: linear-gradient(to right, #c82333, rgba(200, 35, 51, 0));
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    color: #343a40;
+}
+
+.text-center {
+    margin: 1rem 0;
+}
+
+/* -------------------------------------- */
+/* Estilos para el botón de Ir hacia arriba */
+/* -------------------------------------- */
+
+.btn-top {
+    font-size: 25px;
+    padding: 10px;
+    text-decoration: none; 
+    color: #45444483; 
+    border: none; 
+    box-shadow: none; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: none; 
+    margin: 0 auto; 
+}
+
+.btn-top:hover {
+    color: #45444483;
+    box-shadow: none;
+}
+
+/* -------------------------------------- */
+/* Estilos para el chatbot */
+/* -------------------------------------- */
+
+.chat-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.user-message {
+    background-color: #e1e1e1;
+}
+
+.bot-message {
+    background-color: #d1f8d1;
+}
+
+.form-group input {
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Estilos para los botones en la plantilla nuevos y usados */
 .btn-custom {
@@ -176,7 +424,6 @@
     background-color: #23933d;
     transform: scale(1.1);
 }
-
 
 /* Botón de Ver más detalles y comparar vehículos */
 .btn-custom-details {
@@ -269,38 +516,33 @@
     box-shadow: none;
 }
 
-/* Estilos para centrar y mejorar el formulario de búsqueda */
-.formulario_busqueda {
-    max-width: 600px; 
-    margin: auto; 
-    margin-bottom: 5rem;
-    padding: 3rem; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    border-radius: 12px; 
-    background-color: #fff; 
+
+/* Estilos para el chatbot */
+
+.chat-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
-.formulario_busqueda .form-control {
-    padding: 0.75rem 1rem; 
-    margin-bottom: 1.5rem; 
-    font-size: 1rem; 
-    border-radius: 8px; 
+.chat-message {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
 }
 
-.formulario_busqueda input {
-    text-align: center;
-    margin: 0 auto; 
-    padding: 10px; 
-    border: none;
-    border-bottom: 2px solid #000; 
+.user-message {
+    background-color: #e1e1e1;
 }
 
-.formulario_busqueda input:focus {
-    outline: none; 
-    border-bottom: 2px solid #000; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
+.bot-message {
+    background-color: #d1f8d1;
 }
 
-.formulario_busqueda input::placeholder {
-    font-weight: bold; 
+.form-group input {
+    width: 100%;
 }
+
+

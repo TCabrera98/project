@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from vehiculo.models import Vehiculo
 from django.contrib import messages
-from vehiculo.forms import ModeloFormularioBusquedaForm
+from vehiculo.forms import FormularioBusquedaForm
 
 
 def nuevos(request):
@@ -114,9 +114,9 @@ def modal_imagenes(request, vehiculo_id):
 
 
 def formulario_busqueda(request):
-    form = ModeloFormularioBusquedaForm()
+    form = FormularioBusquedaForm()
     if request.method == "POST":
-        form = ModeloFormularioBusquedaForm(request.POST)
+        form = FormularioBusquedaForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("vehiculo:formulario_enviado")

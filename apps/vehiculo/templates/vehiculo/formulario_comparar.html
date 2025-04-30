@@ -4,29 +4,30 @@
 {% block CONTENIDO %}
 <section class="bg-light py-5 mt-5">
     <div class="container">
-        <form method="GET" action="{% url 'vehiculo:comparar_vehiculos' %}" class="filtro-formulario animacion p-5 bg-white shadow rounded">
-            <h2 class="text-center mb-4" style="color: #FF0000; font-weight: bold; font-size: 1.5rem;">Formulario de comparación</h2>
-            <h6 class="text-center mb-3">Seleccione dos vehículos a comparar</h6>
+        <form method="GET" action="{% url 'vehiculo:comparar_vehiculos' %}" class="formulario-comparar animacion p-4">
+            <h2 class="text-center mb-3" style="color: #000; font-size: 1.5rem;">Resolvé tus dudas</h2>
+            <h6 class="text-center mb-4">Seleccione dos vehículos a comparar</h6>
 
             {% if messages %}
                 {% for message in messages %}
-                    <p class="text-danger text-center small mb-4">{{ message }}</p>
+                    <p class="text-danger text-center small mb-3">{{ message }}</p>
                 {% endfor %}
             {% endif %}
 
-            <div class="row justify-content-center mb-4">
-                <div class="col-md-5 mb-4">
+            <!-- Selects -->
+            <div class="d-flex justify-content-center gap-2 mb-4">
+                <div class="mb-3">
                     <select name="vehiculo_1" id="vehiculo_1" class="form-select">
-                        <option value="">Vehiculo 1</option>
+                        <option value="">Vehículo 1</option>
                         {% for vehiculo in vehiculos %}
                             <option value="{{ vehiculo.id }}">{{ vehiculo.modelo }} {{ vehiculo.version }}</option>
                         {% endfor %}
                     </select>
                 </div>
 
-                <div class="col-md-5 mb-4">
+                <div class="mb-3">
                     <select name="vehiculo_2" id="vehiculo_2" class="form-select">
-                        <option value="">Vehiculo 2</option>
+                        <option value="">Vehículo 2</option>
                         {% for vehiculo in vehiculos %}
                             <option value="{{ vehiculo.id }}">{{ vehiculo.modelo }} {{ vehiculo.version }}</option>
                         {% endfor %}
@@ -34,9 +35,8 @@
                 </div>
             </div>
 
-            <!-- Botones con mismo espaciado -->
-            <div class="d-grid mt-4">
-                <a href="{% url 'vehiculo:formulario_comparar' %}" class="btn btn-custom btn-custom-danger mb-3 mx-auto">Limpiar filtros</a>
+            <!-- Botón -->
+            <div class="d-grid mt-3">
                 <button type="submit" class="btn btn-custom btn-custom-success mx-auto">Comparar</button>
             </div>
         </form>

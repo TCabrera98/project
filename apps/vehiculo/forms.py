@@ -1,11 +1,11 @@
 from django import forms
-from .models import ModeloFormularioBusqueda
+from .models import FormularioBusqueda
 
 
-class ModeloFormularioBusquedaForm(forms.ModelForm):
+class FormularioBusquedaForm(forms.ModelForm):
 
     class Meta:
-        model = ModeloFormularioBusqueda
+        model = FormularioBusqueda
         fields = [
             'nombre_completo',
             'numero_celular',
@@ -34,15 +34,38 @@ class ModeloFormularioBusquedaForm(forms.ModelForm):
         }
 
     def clean(self):
+
         cleaned_data = super().clean()
+
+        # Extra los valores del formulario
         nombre_completo = cleaned_data.get('nombre_completo')
         marca = cleaned_data.get('marca')
         modelo = cleaned_data.get('modelo')
+        año_inicio = cleaned_data.get('año_inicio')
+        año_fin = cleaned_data.get('año_fin')
+        numero_celular = cleaned_data.get("numero_celular")
 
+        # Normaliza los datos
         if nombre_completo:
             cleaned_data['nombre_completo'] = nombre_completo.upper()
         if marca:
-            cleaned_data['marca'] = marca.capitalize()
+            # Strip para eliminar espacios en blanco
+            cleaned_data['marca'] = marca.strip().capitalize()
         if modelo:
-            cleaned_data['modelo'] = modelo.capitalize()
+            cleaned_data['modelo'] = modelo.strip().capitalize()
+
+        # Validación de años
+        if año_inicio is not None and año_fin is not None:
+            if año_inicio > año_fin:
+                self.add_error(
+                    'año_inicio', 'El año de inicio no puede ser mayor al año de fin.')
+                self.add_error(
+                    'año_fin', 'Debe ser igual o posterior al año de inicio.')
+
+             # Validación de número de celular
+            if numero_celular:
+                if not numero_celular.isnumeric():
+                    self.add_error('numero_celular',
+                                   'El número de celular debe ser numérico.')
+
         return cleaned_data

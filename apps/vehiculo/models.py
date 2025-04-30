@@ -70,7 +70,7 @@ class VehiculoImagen(models.Model):
         return f"Imagen de {self.vehiculo}"
 
 
-class ModeloFormularioBusqueda(models.Model):
+class FormularioBusqueda(models.Model):
     """
     Clase para crear un formulario de búsqueda de vehículos.
     """
@@ -88,30 +88,8 @@ class ModeloFormularioBusqueda(models.Model):
     marca = models.CharField(max_length=50)
     modelo = models.CharField(max_length=50)
     año_inicio = models.PositiveIntegerField(
-        choices=[(año, año) for año in range(2008, datetime.now().year + 1)], null=True, blank=True, default="None"
+        choices=[(año, año) for año in range(2008, datetime.now().year + 1)], null=True, blank=True, default=None
     )
     año_fin = models.PositiveIntegerField(
-        choices=[(año, año) for año in range(2008, datetime.now().year + 1)], null=True, blank=True, default="None"
+        choices=[(año, año) for año in range(2008, datetime.now().year + 1)], null=True, blank=True, default=None
     )
-
-    def clean(self):
-        # Obtiene el año actual
-        año_actual = datetime.now().year
-
-        # Verifica el año de inicio
-        if self.año_inicio is not None and self.año_inicio > año_actual:
-            raise ValidationError(
-                f"El año de inicio no puede ser mayor a {año_actual}.")
-
-        # Verifica el año de fin
-        if self.año_fin is not None and self.año_fin > año_actual:
-            raise ValidationError(
-                f"El año de fin no puede ser mayor a {año_actual}.")
-
-        # Verifica que el año de inicio no sea mayor al de fin
-        if self.año_inicio is not None and self.año_fin is not None and self.año_inicio > self.año_fin:
-            raise ValidationError(
-                "El año de inicio no puede ser mayor al de fin.")
-
-    def __str__(self):
-        return f"{self.nombre_completo} {self.marca} {self.modelo} {self.año_inicio}-{self.año_fin}"

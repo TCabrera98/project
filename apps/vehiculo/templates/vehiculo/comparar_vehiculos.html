@@ -8,40 +8,92 @@
         <div class="row justify-content-center">
             <!-- Vehículo 1 -->
             <div class="col-md-5 mb-4">
-                <div class="card shadow rounded-4">
-                    <img src="{{ vehiculo1.imagen.url }}" class="card-img-top rounded-top-4">
+                <div class="card shadow rounded">
                     <div class="card-body">
-                        <h4 class="card-title text-center">{{ vehiculo1.marca }} {{ vehiculo1.modelo }}</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><strong>Motor:</strong> {{ vehiculo1.motor }}</li>
-                            <li class="list-group-item"><strong>Potencia:</strong> {{ vehiculo1.potencia }}</li>
-                            <li class="list-group-item"><strong>Transmisión:</strong> {{ vehiculo1.transmision }}</li>
-                            <li class="list-group-item"><strong>Tracción:</strong> {{ vehiculo1.traccion }}</li>
-                            <li class="list-group-item"><strong>Kilometraje:</strong> {{ vehiculo1.kilometraje }} Km</li>
-                            <li class="list-group-item"><strong>Año:</strong> {{ vehiculo1.año }}</li>
-                        </ul>
+                        <h4 class="card-title text-center">{{ vehiculo1.marca }} {{ vehiculo1.modelo }} {{ vehiculo1.version}} </h4>
+                        <!-- Imagen del Vehículo 1 -->
+                        <div class="position-relative img-comparar rounded">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalVehiculo1">
+                                <img src="{{ vehiculo1.imagenes.first.imagen.url }}" class="d-block w-100 vehiculo-img rounded" alt="Imagen de {{ vehiculo1.marca }} {{ vehiculo1.modelo }}" style="max-height: 250px; object-fit: contain; margin-left: auto; margin-right: auto;">
+                            </a>
+                            <!-- Enlace "Ver imagen" -->
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalVehiculo1" class="position-absolute bottom-0 start-50 translate-middle-x bg-dark text-white px-3 py-2 rounded-3 opacity-0 hover-opacity-100 ver-imagen-link">
+                                Ver imagen
+                            </a>
+                        </div>
                     </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Motor:</strong> {{ vehiculo1.motor }}</li>
+                        <li class="list-group-item"><strong>Potencia:</strong> {{ vehiculo1.potencia }}</li>
+                        <li class="list-group-item"><strong>Transmisión:</strong> {{ vehiculo1.transmision }}</li>
+                        <li class="list-group-item"><strong>Tracción:</strong> {{ vehiculo1.traccion }}</li>
+                        <li class="list-group-item"><strong>Capacidad del tanque:</strong> {{ vehiculo1.tanque_combustible }}</li>
+                        <li class="list-group-item"><strong>Kilometraje:</strong> {{ vehiculo1.kilometraje }} Km</li>
+                        <li class="list-group-item"><strong>Año:</strong> {{ vehiculo1.año }}</li>
+                    </ul>
                 </div>
             </div>
 
             <!-- Vehículo 2 -->
             <div class="col-md-5 mb-4">
-                <div class="card shadow rounded-4">
-                    <img src="{{ vehiculo2.imagen.url }}" class="card-img-top rounded-top-4">
+                <div class="card shadow rounded">
                     <div class="card-body">
-                        <h4 class="card-title text-center">{{ vehiculo2.marca }} {{ vehiculo2.modelo }}</h4>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><strong>Motor:</strong> {{ vehiculo2.motor }}</li>
-                            <li class="list-group-item"><strong>Potencia:</strong> {{ vehiculo2.potencia }}</li>
-                            <li class="list-group-item"><strong>Transmisión:</strong> {{ vehiculo2.transmision }}</li>
-                            <li class="list-group-item"><strong>Tracción:</strong> {{ vehiculo2.traccion }}</li>
-                            <li class="list-group-item"><strong>Kilometraje:</strong> {{ vehiculo2.kilometraje }} Km</li>
-                            <li class="list-group-item"><strong>Año:</strong> {{ vehiculo2.año }}</li>
-                        </ul>
+                        <h4 class="card-title text-center">{{ vehiculo2.marca }} {{ vehiculo2.modelo }} {{ vehiculo2.version}} </h4>
+                        <!-- Imagen del Vehículo 2 -->
+                        <div class="position-relative img-comparar rounded">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalVehiculo2">
+                                <img src="{{ vehiculo2.imagenes.first.imagen.url }}" class="d-block w-100 vehiculo-img rounded" alt="Imagen de {{ vehiculo2.marca }} {{ vehiculo2.modelo }}" style="max-height: 250px; object-fit: contain; margin-left: auto; margin-right: auto;">
+                            </a>
+                            <!-- Enlace "Ver imagen" -->
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalVehiculo2" class="position-absolute bottom-0 start-50 translate-middle-x bg-dark text-white px-3 py-2 rounded-3 opacity-0 hover-opacity-100 ver-imagen-link">
+                                Ver imagen
+                            </a>
+                        </div>
                     </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Motor:</strong> {{ vehiculo2.motor }}</li>
+                        <li class="list-group-item"><strong>Potencia:</strong> {{ vehiculo2.potencia }}</li>
+                        <li class="list-group-item"><strong>Transmisión:</strong> {{ vehiculo2.transmision }}</li>
+                        <li class="list-group-item"><strong>Tracción:</strong> {{ vehiculo2.traccion }}</li>
+                        <li class="list-group-item"><strong>Capacidad del tanque:</strong> {{ vehiculo2.tanque_combustible }}</li>
+                        <li class="list-group-item"><strong>Kilometraje:</strong> {{ vehiculo2.kilometraje }} Km</li>
+                        <li class="list-group-item"><strong>Año:</strong> {{ vehiculo2.año }}</li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <a href="{% url 'vehiculo:formulario_comparar' %}" class="btn btn-custom btn-custom-success mt-4 mb-5 d-block mx-auto" aria-label="Ir hacia atrás">Ir hacia atrás</a>
+        <a href="{% url 'vehiculo:formulario_comparar' %}" class="btn btn-custom btn-custom-danger mt-4 mb-5 d-block mx-auto">Limpiar filtros</a>
+    </div>
 </section>
+
+<!-- Modal Vehículo 1 -->
+<div class="modal fade" id="modalVehiculo1" tabindex="-1" aria-labelledby="modalVehiculo1Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalVehiculo1Label">{{ vehiculo1.marca }} {{ vehiculo1.modelo }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="{{ vehiculo1.imagenes.first.imagen.url }}" class="d-block w-100 rounded" alt="Imagen de {{ vehiculo1.marca }} {{ vehiculo1.modelo }}"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Vehículo 2 -->
+<div class="modal fade" id="modalVehiculo2" tabindex="-1" aria-labelledby="modalVehiculo2Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalVehiculo2Label">{{ vehiculo2.marca }} {{ vehiculo2.modelo }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="{{ vehiculo2.imagenes.first.imagen.url }}" class="d-block w-100 rounded" alt="Imagen de {{ vehiculo2.marca }} {{ vehiculo2.modelo }}"/>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock CONTENIDO %}
