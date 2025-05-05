@@ -2,15 +2,15 @@
 {% load static %}
 
 {% block CONTENIDO %}
-<div class="container mt-5">
-    <h2>Chatbot de Cabrera Automotores</h2>
+<div class="container mb-5 pt-5 py-5 text-center d-block mx-auto filtro-formulario">
+    <h2>CabreraBot</h2>
     <div class="chat-container">
         {% if respuesta %}
             <div class="chat-message user-message">
                 <strong>Tú:</strong> {{ pregunta }}
             </div>
             <div class="chat-message bot-message">
-                <strong>Bot:</strong> {{ respuesta }}
+                <strong>CabreraBot:</strong> {{ respuesta }}
             </div>
         {% endif %}
     </div>
@@ -18,9 +18,10 @@
     <form method="post">
         {% csrf_token %}
         <div class="form-group">
-            <input type="text" name="pregunta" class="form-control" placeholder="Haz una pregunta..." required>
+            <input type="text" name="pregunta" class="form-control text-center" placeholder="Haz una pregunta" required>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+        <button type="submit" class="btn btn-custom btn-custom-success mx-auto">Enviar</button>
     </form>
 </div>
+
 {% endblock %}

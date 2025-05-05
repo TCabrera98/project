@@ -36,6 +36,39 @@
        
     {% endblock CONTENIDO %}
 
+    <!-- Botón del chatbot 
+    <div id="chatbot-icon" class="position-fixed bottom-0 end-0 m-3">
+        <button class="btn btn-light" 
+            hx-get="{% url 'chatbot' %}" 
+            hx-target="#chat-modal-body" 
+            hx-trigger="click" 
+            hx-on:htmx:afterOnLoad="new bootstrap.Modal(document.getElementById('chatModal')).show();">
+            <img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" alt="ChatBot" style="width: 22px; height: 22px;">
+        </button>
+    </div>
+    -->
+    
+    <!-- Modal del ChatBot 
+    <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="chatModalLabel">Asistente Virtual</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body" id="chat-modal-body"> 
+            <div class="text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Cargando...</span>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div> 
+    -->
+    
+
     <!-- Footer-->
     {% include "home/footer.html" %}
 
